@@ -1,0 +1,113 @@
+project structure: 
+        cookie_shop/
+        │
+        ├── src/
+        │   ├── controllers/
+        │   ├── services/
+        │   ├── repositories/
+        │   ├── routes/
+        │   ├── data/
+        │   ├── models/
+        │   ├── middleware/
+        │   ├── utils/
+        │   ├── app.js
+        │   └── server.js
+        │
+        ├── learning_notes.md
+        ├── package.json
+        ├── .gitignore
+        └── README.md
+ (or include app folder, then add all components of the project)
+
+- npm init -y 
+    -> creates package.json
+- npm install express
+- add .gitignore file
+
+cookie object properties: 
+- id
+- name
+- price
+- quantityInStock
+- flavor
+- category
+- isAvailable
+
+- potential extra features: 
+🤖 AI customer support for your Cookie Shop.
+📦 Inventory forecasting using AI.
+📧 Email automation.
+🧾 Invoice extraction.
+📄 Document Q&A.
+💬 Chat with your database.
+🧠 AI agents that perform backend tasks.
+🔄 Business workflow automation.
+
+
+
+🍪 Cookie Shop MVP (Minimum Viable Product)
+👤 Authentication:
+ Register
+ Login
+ Get current user (GET /me)
+ Hash passwords with bcrypt
+ JWT authentication
+ Refresh tokens (later, if your course covers them)
+
+🍪 Products
+Public:
+ Get all products
+ Get product by ID
+
+Admin:
+ Create product
+ Update product
+ Delete product
+
+A product should have something like:
+    {
+        id,
+        name,
+        description,
+        price,
+        stock,
+        imageUrl,
+        category
+    }
+
+🛒 Cart
+Logged-in users:
+ Add product to cart
+ Remove product
+ Change quantity
+ View cart
+
+📦 Orders
+Logged-in users:
+- Place order
+- View my orders
+
+Admin:
+- View all orders
+- Change order status
+
+Statuses:
+- Pending
+- Preparing
+- Out for Delivery
+- Delivered
+- Cancelled
+
+👮 Authorization
+ Normal users cannot create products.
+ Admins can manage products.
+ Users can only view their own orders.
+
+📊 Nice-to-have later
+ Search products
+ Filter by category
+ Pagination
+ Product ratings
+ Favorites
+ Coupons
+ Inventory alerts
