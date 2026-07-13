@@ -26,10 +26,10 @@ exports.findByEmail = async (email) => {
     return users.find(user => user.email === email);
 }
 
-exports.findByUsername = async (username) => {  
-    const users = await readUsers();
-    return users.find(user => user.username === username);  
-}
+// exports.findByUsername = async (username) => {  
+//     const users = await readUsers();
+//     return users.find(user => user.username === username);  
+// }
 
 exports.create = async (user) => {
     const users = await readUsers();
