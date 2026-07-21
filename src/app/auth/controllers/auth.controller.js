@@ -10,26 +10,34 @@ const authService = require('../services/auth.service');
  * 
  * */
 
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
     try {
         const {email, password} = req.body;
-        await authService.register(email, password);
+        await authService.register(email, password, req.correlationId);
         return res.status(201).json({message: 'Account successfully created!'});
     } catch (error) {
-        return res.status(409).json({message: 'An account already exists with this email.'});
+        //return res.status(409).json({message: 'An account already exists with this email.'});
+        return next(error); // pass the error to the global error handler middleware
     }
 }
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
     try {
         const {email, password} = req.body;
-        const tokens = await authService.login(email, password);
+        const tokens = await authService.login(email, password, req.correlationId);
         return res.status(200).json({message: 'Login successful!', ...tokens});
     } catch (error) {
-        return res.status(401).json({message: 'Invalid email or password.'});
+        // return res.status(401).json({message: 'Invalid email or password.'});
+
+        return next(error);
     }
 }
 
-exports.getUser = async (req, res) => {
+exports.getMe = async (req, res) => {
 
 } 
+
+
+
+
+// throw as early as u can, catch as late as u can (el controller) -> Best practice
