@@ -10,28 +10,28 @@ exports.register = async (email, password, correlationId) => {
         }
     */
 
+    // const existingUsername = await authRepo.findByUsername(username);
+    // if (existingUsername) {
+    //     throw new Error('Username is taken!');
+    // } 
+    
     logger.info('Registering user with email: ' + email, { correlationId });
     const existingEmail = await authRepo.findByEmail(email);
     if (existingEmail) {
         throw UserAlreadyExistsError;
     }
 
-
-    // const existingUsername = await authRepo.findByUsername(username);
-    // if (existingUsername) {
-    //     throw new Error('Username is taken!');
-    // } 
-    
     logger.info('User doesnt exist', { correlationId });
 
     const hashedPassword = await hashPassword(password);  // after checks, hash password & create user object
     logger.info('Hashed password', { correlationId }    );
+
     const user = {
         email,
         password: hashedPassword
     };
-
     return authRepo.create(user);
+    
     logger.info('User created.', { correlationId });
 }
 

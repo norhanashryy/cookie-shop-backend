@@ -38,6 +38,4 @@ exports.getMe = async (req, res) => {
 } 
 
 
-
-
-// throw as early as u can, catch as late as u can (el controller) -> Best practice
+// throw as early as u can (service abl ma ab3at lel repository), catch as late as u can (el controller) -> Best practice
