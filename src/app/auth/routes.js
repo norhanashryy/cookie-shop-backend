@@ -12,5 +12,6 @@ router.post('/login', authController.login);
 
 // user info
 router.get('/me', authController.getMe);
+// /me receives the access token in the Authorization header, verifies it, and returns the user info
 
 module.exports = router;
