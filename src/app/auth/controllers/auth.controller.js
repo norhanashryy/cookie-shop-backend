@@ -1,15 +1,5 @@
 const authService = require('../services/auth.service');
 
-/**
- *          To-Do: 
- * POST /auth/register
-   POST /auth/login
-   GET  /auth/me
-   POST /auth/refresh
-   POST /auth/logout
- * 
- * */
-
 exports.register = async (req, res, next) => {
     try {
         const {email, password} = req.body;
@@ -34,7 +24,7 @@ exports.login = async (req, res, next) => {
 
 exports.getMe = async (req, res, next) => {
     try {
-        // const {email} = req.body.email;      -> useless for this request.
+        // const {email} = req.body.email;      -> useless for this request
 
         const authHeader = req.headers['authorization'];
         if (!authHeader) {
@@ -48,5 +38,23 @@ exports.getMe = async (req, res, next) => {
         next(error);
     }
 } 
+
+exports.refresh = async (req, res, next) => {
+    try {
+        const {refreshToken} = req.body;
+        const accessToken = await authService.refresh(refreshToken);
+        return res.status(200).json({accessToken});
+    } catch (error) {
+        next(error);
+    }
+}
+
+exports.logout = (req, res, next) => {
+    try {
+        // to be implemented
+    } catch(error) {
+        next(error);
+    }
+}
 
 // throw as early as u can (service abl ma ab3at lel repository), catch as late as u can (el controller) -> Best practice

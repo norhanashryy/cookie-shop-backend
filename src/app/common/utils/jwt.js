@@ -24,3 +24,4 @@ exports.verifyAccessToken = (token) => {
 exports.verifyRefreshToken = (token) => {
     return jwt.verify(token, REFRESH_SECRET);
 }
+// throws an exception if somethings wrong

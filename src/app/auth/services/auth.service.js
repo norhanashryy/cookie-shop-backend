@@ -1,7 +1,7 @@
 const authRepo = require('../repositories/auth.repository');
 const {hashPassword, comparePassword} = require('../../common/utils/hash');
 const {createAccessToken, createRefreshToken, verifyAccessToken, verifyRefreshToken } = require('../../common/utils/jwt'); 
-const { UserAlreadyExistsError, InvalidCredentialsError } = require('../utils/errors');
+const { UserAlreadyExistsError, InvalidCredentialsError, UnauthorizedError } = require('../utils/errors');
 const logger = require('../../common/logger/logger');
 
 exports.register = async (email, password, correlationId) => {
@@ -66,4 +66,14 @@ exports.getMe = async (token) => {
             email: user.email        
         };
     }
+}
+
+exports.refresh = async (token) => {
+    const verifiedRefreshToken = verifyRefreshToken(token);
+
+    const user = await authRepo.findByEmail(verifiedRefreshToken.email);
+    if(!user) {
+        throw UnauthorizedError;
+    }
+    return createAccessToken(user);
 }
