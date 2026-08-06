@@ -31,9 +31,9 @@ exports.register = async (email, password, correlationId) => {
         email,
         password: hashedPassword
     };
-    return authRepo.create(user);
 
     logger.info('User created.', { correlationId });
+    return authRepo.create(user);
 }
 
 exports.login = async (email, password, correlationId) => {

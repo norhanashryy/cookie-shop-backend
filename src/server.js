@@ -1,4 +1,5 @@
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config(); // allows global access to environmental variables
+
 const express = require('express');
 const authRoutes = require('./app/auth/routes');
 const app = express();

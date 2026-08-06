@@ -3,3 +3,8 @@ node_modules/
 
 notes.txt
 learning_notes.md
+/src/generated/prisma
+
+.agents/
+.claude/
+.windsurf/
