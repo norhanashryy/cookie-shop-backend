@@ -15,7 +15,7 @@ router.get('/me', authController.getMe);
 // /me receives the access token in the Authorization header, verifies it, and returns the user info
 
 // refresh route
-router.get('/refresh', authController.refresh);
+router.post('/refresh', authController.refresh);
 
 router.get('/logout', authController.logout);
 

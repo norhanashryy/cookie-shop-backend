@@ -5,16 +5,6 @@ const { UserAlreadyExistsError, InvalidCredentialsError, UnauthorizedError } = r
 const logger = require('../../common/logger/logger');
 
 exports.register = async (email, password, correlationId) => {
-    /* if (authRepo.findByEmail(email)) {
-        throw new Error('This email has an existing account!');
-        }
-    */
-
-    // const existingUsername = await authRepo.findByUsername(username);
-    // if (existingUsername) {
-    //     throw new Error('Username is taken!');
-    // } 
-    
     logger.info('Registering user with email: ' + email, { correlationId });
     const existingEmail = await authRepo.findByEmail(email);
     if (existingEmail) {
@@ -22,9 +12,7 @@ exports.register = async (email, password, correlationId) => {
     }
 
     logger.info('User doesnt exist', { correlationId });
-
-    const hashedPassword = await hashPassword(password);  
-    // after checks, hash password & create user object
+    const hashedPassword = await hashPassword(password);  // after checks, hash password & create user object
     logger.info('Hashed password', { correlationId }    );
 
     const user = {
@@ -32,8 +20,9 @@ exports.register = async (email, password, correlationId) => {
         password: hashedPassword
     };
 
+    const createdUser = await authRepo.create(user);
     logger.info('User created.', { correlationId });
-    return authRepo.create(user);
+    return createdUser;
 }
 
 exports.login = async (email, password, correlationId) => {
@@ -55,12 +44,16 @@ exports.login = async (email, password, correlationId) => {
 
 exports.getMe = async (token) => {
     const verifiedUserPayload = verifyAccessToken(token); // throws error if token is invalid or expired
+    console.log("Payload:", verifiedUserPayload);
+
     if (verifiedUserPayload) {
+
         // use the payload to search for the latest user in the repo
         //console.log(`user's payload: ${JSON.stringify(verifiedUserPayload)}`);
         // return user = await authRepo.findByEmail(verifiedUserPayload.email);    INCORRECT, it creates a global variable
 
         const user = await authRepo.findByEmail(verifiedUserPayload.email);
+        console.log("User:", user);
         return {
             id: user.id,
             email: user.email        
