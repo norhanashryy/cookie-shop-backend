@@ -42,3 +42,11 @@ exports.delete = async (id) => {
         }
     });
 };
+
+exports.findAllActive = async () => {
+    return prisma.product.findMany({
+        where: {
+            isActive: true
+        }
+    });
+};

@@ -44,3 +44,12 @@ exports.deleteProduct = async (req, res, next) => {
         next(error);
     }
 }
+
+exports.getAllActiveProducts = async (req, res, next) => {
+    try {
+        const products = await productService.getAllActiveProducts();
+        return res.status(200).json(products);
+    } catch (error) {
+        next(error);
+    }
+};

@@ -63,3 +63,7 @@ exports.deleteProduct = async (id) => {
 
     return productRepo.delete(id);
 }
+
+exports.getAllActiveProducts = async () => {
+    return productRepo.findAllActive();
+};
