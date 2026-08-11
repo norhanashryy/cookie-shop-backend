@@ -9,10 +9,18 @@ exports.create = async (product) => {
 exports.findById = async (id) => {
     return prisma.product.findUnique({
         where: {
-            id: id
+            id: Number(id)
         }
     });
-}
+};
+
+exports.findByName = async (name) => {
+    return prisma.product.findUnique({
+        where: {
+            name: name
+        }
+    });
+}   
 
 exports.findAll = async () => {
     return prisma.product.findMany();
@@ -21,16 +29,16 @@ exports.findAll = async () => {
 exports.update = async (id, product) => {
     return prisma.product.update({
         where: {
-            id: id
+            id: Number(id)
         },
         data: product
     });
-} 
+};
 
 exports.delete = async (id) => {
     return prisma.product.delete({
         where: {
-            id: id
+            id: Number(id)
         }
     });
-}
+};
