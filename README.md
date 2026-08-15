@@ -14,6 +14,8 @@ A backend application for an online cookie shop built with **Node.js**, **Expres
 * Protected routes
 * Database access using Prisma ORM
 * Database migrations with Prisma Migrate
+* Product CRUD operations
+* Product active/inactive management
 * Layered architecture
 * Repository pattern
 * Centralized error handling
@@ -83,7 +85,13 @@ The project follows a layered architecture where each layer has a single respons
 | POST   | `/auth/login`    | Authenticate a user                           |
 | GET    | `/auth/me`       | Retrieve the authenticated user's information |
 | POST   | `/auth/refresh`  | Generate a new access token                   |
-| GET    | `/auth/logout`   | Logout       *(Planned)*                      |
+| GET    | `/auth/logout`   | Logout    (Planned)                           |
+| POST   | `/products`      | Create a new product                          |
+| GET    | `/products`      | Retrieve all products                         |
+| GET    | `/products/active`| Retrieve all active products                 |
+| GET    | `/products/:id`  | Retrieve a product by ID                      |
+| PATCH  | `/products/:id`  | Update a product                              |
+| DELETE | `/products/:id`  | Delete a product                              |
 
 ---
 
@@ -91,14 +99,12 @@ The project follows a layered architecture where each layer has a single respons
 
 Planned features include:
 
-* Product management
 * Order management
 * Shopping cart
 * Inventory management
 * Product search and pagination
 * Transactions and concurrency control
 * API documentation with Swagger
-* Input validation
 * Unit and integration testing
 * Docker support
 * Frontend application
